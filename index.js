@@ -20,7 +20,7 @@ const client = new MongoClient(uri, {
     deprecationErrors: true,
   },
 });
-
+ 
 async function run() {
   try {
     // Connect the client to the server	(optional starting in v4.7)
@@ -35,7 +35,7 @@ app.post('/product', async (req, res) => {
      console.log(result);
      res.send(result);
    });
-  // post to Cart
+  // Post to Cart
 app.post('/cart', async (req, res) => {
      const product = req.body;
      //   console.log(product);
