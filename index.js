@@ -27,6 +27,7 @@ async function run() {
 //     await client.connect();
 const database = client.db("productDB");
 const productCollection = database.collection("product");
+const cartCollection = database.collection("cartItem");
 app.post('/product', async (req, res) => {
      const product = req.body;
      //   console.log(product);
@@ -34,15 +35,33 @@ app.post('/product', async (req, res) => {
      console.log(result);
      res.send(result);
    });
-
+  // post to Cart
+app.post('/cart', async (req, res) => {
+     const product = req.body;
+     //   console.log(product);
+     const result = await cartCollection.insertOne(product);
+     console.log(result);
+     res.send(result);
+   });
+// get from cart
+   app.get('/cart', async(req, res)=>{
+    const cursor = cartCollection.find()
+    const result = await cursor.toArray();
+       res.send(result);
+  });
+  //delete from cart
+  app.delete('/cart/:id', async(req, res)=>{
+    const id = req.params.id;
+    const query = { _id: new ObjectId(id) };
+    const result = await cartCollection.deleteOne(query);
+    res.send(result)
+  
+  })
    app.get('/product', async(req, res)=>{
     const cursor = productCollection.find()
     const result = await cursor.toArray();
        res.send(result);
   });
-// new code
-
-// ...
 
 // Route to get data by brandName
 app.get('/product/brand/:brandName', async (req, res) => {
