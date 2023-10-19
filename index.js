@@ -73,7 +73,6 @@ app.get('/product/brand/:brandName', async (req, res) => {
     res.send(result);
   } catch (error) {
     console.error("Error:", error);
-    res.status(500).json({ error: "An error occurred." });
   }
 });
 
