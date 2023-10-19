@@ -76,7 +76,7 @@ app.get('/product/brand/:brandName', async (req, res) => {
   }
 });
 
-// Route to get data by id
+// get data by id
 app.get('/product/id/:id', async (req, res) => {
   const id = req.params.id;
 
